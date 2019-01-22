@@ -143,7 +143,44 @@ int main() {
                     pos_j2=j;
                 }
                 if(pos_i == pos_i2){
-                    // Encryption Code
+                    /*if(pos_j!=4 && pos_j2!=4){
+                        str_arr[m]=arr[pos_i][pos_j+1];
+                        str_arr[m+1]=arr[pos_i2][pos_j2+1];
+                        m++;
+                    }
+                    else if(pos_j == 4){
+                        str_arr[m]=arr[pos_i][0];
+                        str_arr[m+1]=arr[pos_i2][pos_j2+1];
+                        m++;
+                    }
+                    else if(pos_j2 == 4){
+                        str_arr[m]=arr[pos_i][pos_j+1];
+                        str_arr[m+1]=arr[pos_i2][0];
+                        m++;
+                    }
+                }
+                else if(pos_j==pos_j2){
+                    if(pos_i!=4 && pos_i2!=4){
+                        str_arr[m]=arr[pos_i+1][pos_j];
+                        str_arr[m+1]=arr[pos_i2+1][pos_j2];
+                        m++;
+                    }
+                    else if(pos_i==4){
+                        str_arr[m]=arr[0][pos_j];
+                        str_arr[m+1]=arr[pos_i2+1][pos_j2];
+                        m++;
+                    }
+                    else if(pos_i2==4){
+                        str_arr[m]=arr[pos_i+1][pos_j];
+                        str_arr[m+1]=arr[0][pos_j2];
+                        m++;
+                    }
+                }
+                else{
+                    str_arr[m]=arr[pos_i][pos_j2];
+                    str_arr[m+1]=arr[pos_i2][pos_j];
+                    m++;
+                    */
                 }
             }
 
