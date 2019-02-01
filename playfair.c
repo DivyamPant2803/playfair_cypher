@@ -2,10 +2,9 @@
 #include <memory.h>
 
 int main() {
-    char key[255], str[255], temp, arr[5][5], alpha[30],str_arr[255];
-    int i, j, k, ct = 0, m = 1, n = 0, ct2 = 0, l2, ct3 = 0;
+    char key[255], str[255], temp, arr[5][5], alpha[30];
+    int i, j, k, ct = 0, m = 1, n = 0, ct2 = 0, ct3 = 0;
     long key_len, str_len;
-
 
     printf("\n Enter the text");
     fgets(str, sizeof(str), stdin);
@@ -24,20 +23,16 @@ int main() {
         }
     }
     key_len = strlen(key);
-    //puts(key);
 
-    for (i = 0; i < str_len; i++) {
-        if (str[i] == ' ') {
-            for (j = i; j < str_len - 1; j++) {
-                str[j] = str[j + 1];
-            }
-        }
+    for(i=0;str[i];i++){
+        if(str[i] != ' ')
+            str[ct2++]=str[i];
     }
-    str_len = strlen(str);
+    str[ct2]='\0';
+    str_len=strlen(str);
 
     temp = 'z';
-    //printf("%d",ct);
-    //printf("%ld",str_len);
+
     for (i = 0; i < str_len; i++) {
         if (str[i] == str[i + 1]) {
             for (long l = str_len - 1; l > i; l--) {
@@ -46,33 +41,22 @@ int main() {
             str[i + 1] = temp;
         }
     }
-    //puts(str);
-    str_len = strlen(str);
-    // printf("%ld",str_len);
-    for (i = 0; i < str_len; i++) {
+
+    for (i = 0; i < strlen(str); i++) {
         ct++;
     }
-    //printf("%d",ct);
+
     if (ct % 2 != 0) {
         str[ct] = temp;
     }
-    //puts(str);
 
     for(i=0;i<5;i++){
         for(j=0;j<5;j++){
             arr[i][j]='0';
         }
     }
-    for(i=0;i<5;i++){
-        for(j=0;j<5;j++){
-            printf(" %c ",arr[i][j]);
-        }
-        printf("\n");
-    }
-    printf("\n");
-    printf("%ld \n",key_len);
+
     for (i = 0; i < m; i++) {
-        //n=0;
         for (j = 0; n < key_len-1; j++, n++) {
             if (j == 5) {
                 m++;
@@ -80,14 +64,7 @@ int main() {
             } else {
                 arr[i][j] = key[n];
             }
-
         }
-    }
-    for (i = 0; i < 5; i++) {
-        for (j = 0; j < 5; j++) {
-            printf(" %c ", arr[i][j]);
-        }
-        printf("\n");
     }
     i = 0;
     for (char c = 'a'; c <= 'z'; c++) {
@@ -112,9 +89,6 @@ int main() {
             }
         }
     }
-    puts(str);
-    puts(key);
-    puts(alpha);
     k=0;
     for(i=0;i<5;i++){
         for(j=0;j<5;j++){
@@ -124,67 +98,60 @@ int main() {
             }
         }
     }
-    for (i = 0; i < 5; i++) {
-        for (j = 0; j < 5; j++) {
-            printf(" %c ", arr[i][j]);
+    int c=0,l=0;
+    int ai[str_len],aj[str_len];
+    for(k=0;k<str_len;k++){
+        c=0;
+        for(i=0;i<5;i++) {
+            for (j = 0; j < 5; j++) {
+                if (arr[i][j] == str[k]) {
+                    ai[k]=i;
+                    aj[k]=j;
+                    c++;
+                    break;
+                }
+            }
+            if (c > 0) {
+                break;
+            }
         }
-        printf("\n");
+
     }
-    int pos_i,pos_j,pos_i2,pos_j2;
-    for(k=0;k<str_len;k+=2){
-        for(i=0;i<5;i++){
-            for(j=0;j<5;j++){
-                if(str[k]==arr[i][j]){
-                    pos_i=i;
-                    pos_j=j;
+    m=0;
+    printf("\n Encrypted Text : ");
+    int r1,r2,c1,c2;
+    for(k=0;k<str_len;k+=2) {
+        for (i = 0; i < 5; i++) {
+            for (j = 0; j < 5; j++) {
+                if (arr[i][j] == str[m]) {
+                    r1 = i;
+                    c1 = j;
                 }
-                if(str[k+1]==arr[i][j]){
-                    pos_i2=i;
-                    pos_j2=j;
-                }
-                if(pos_i == pos_i2){
-                    /*if(pos_j!=4 && pos_j2!=4){
-                        str_arr[m]=arr[pos_i][pos_j+1];
-                        str_arr[m+1]=arr[pos_i2][pos_j2+1];
-                        m++;
-                    }
-                    else if(pos_j == 4){
-                        str_arr[m]=arr[pos_i][0];
-                        str_arr[m+1]=arr[pos_i2][pos_j2+1];
-                        m++;
-                    }
-                    else if(pos_j2 == 4){
-                        str_arr[m]=arr[pos_i][pos_j+1];
-                        str_arr[m+1]=arr[pos_i2][0];
-                        m++;
-                    }
-                }
-                else if(pos_j==pos_j2){
-                    if(pos_i!=4 && pos_i2!=4){
-                        str_arr[m]=arr[pos_i+1][pos_j];
-                        str_arr[m+1]=arr[pos_i2+1][pos_j2];
-                        m++;
-                    }
-                    else if(pos_i==4){
-                        str_arr[m]=arr[0][pos_j];
-                        str_arr[m+1]=arr[pos_i2+1][pos_j2];
-                        m++;
-                    }
-                    else if(pos_i2==4){
-                        str_arr[m]=arr[pos_i+1][pos_j];
-                        str_arr[m+1]=arr[0][pos_j2];
-                        m++;
-                    }
-                }
-                else{
-                    str_arr[m]=arr[pos_i][pos_j2];
-                    str_arr[m+1]=arr[pos_i2][pos_j];
-                    m++;
-                    */
+                if (arr[i][j] == str[m + 1]) {
+                    r2 = i;
+                    c2 = j;
                 }
             }
 
         }
-    }
 
+        if (r1 == r2) {
+            if (c2 == 4) {
+                printf("%c%c", arr[r1][c1 + 1], arr[r1][0]);
+            } else {
+                printf("%c%c", arr[r1][c1 + 1], arr[r1][c2 + 1]);
+            }
+        }
+        if (c1 == c2) {
+            if (r2 == 4) {
+                printf("%c%c", arr[r1 + 1][c1], arr[0][c2]);
+            } else {
+                printf("%c%c", arr[r1 + 1][c1], arr[r2 + 1][c2]);
+            }
+        }
+        if (r1 != r2 && c1 != c2) {
+            printf("%c%c", arr[r1][c2], arr[r2][c1]);
+        }
+        m+=2;
+    }
 }
